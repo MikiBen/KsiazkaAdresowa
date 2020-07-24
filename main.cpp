@@ -115,6 +115,7 @@ vector<Adresat> odczytPliku(int idUzytkownika) {
 vector<Adresat> DodanieKontaktu(vector <Adresat> adresaci, int idUzytkownika) {
     string imie, nazwisko, nrTelefonu, email, adres,numer,linia;
     int idAdresata;
+    int polozenieZnaku;
     ("cls");
     cin.sync();
     cout<<"Podaj imie: ";
@@ -131,7 +132,13 @@ vector<Adresat> DodanieKontaktu(vector <Adresat> adresaci, int idUzytkownika) {
     fstream plik;
     plik.open("Ksiazka_kontaktow.txt",ios::in);
     if(plik.good()==true)
-        idAdresata = adresaci[adresaci.size()-1].idAdresata+1;
+        {
+            while(getline(plik,linia))
+         {   polozenieZnaku = linia.find_first_of("|");
+        idAdresata = atoi(linia.substr(0,polozenieZnaku).c_str())+1;
+         }
+        }
+
     else idAdresata =1;
     plik.close();
     adresaci.push_back(Adresat{idAdresata,imie,nazwisko,nrTelefonu,email,adres});
@@ -267,29 +274,25 @@ vector<Adresat> edycjaKontaktow(vector <Adresat> adresaci, int idUzytkownika) {
             adresaci[i].imie=daneDoZmiany;
             nadpisywaniePlikuPoEdycji(adresaci, i, idUzytkownika);
             return adresaci;
-        }
-        else if (wybor == '2') {
+        } else if (wybor == '2') {
             cout<<"Obecne nazwisko to: "<<adresaci[i].nazwisko<<endl<<"Podaj nowe nazwisko: "<<endl;
             cin>>daneDoZmiany;
             adresaci[i].nazwisko=daneDoZmiany;
             nadpisywaniePlikuPoEdycji(adresaci, i, idUzytkownika);
             return adresaci;
-        }
-        else if (wybor == '3') {
+        } else if (wybor == '3') {
             cout<<"Obecny numer telefonu to: "<<adresaci[i].nazwisko<<endl<<"Podaj nowy numer telefonu: "<<endl;
             cin>>daneDoZmiany;
             adresaci[i].numerTelefonu=daneDoZmiany;
             nadpisywaniePlikuPoEdycji(adresaci, i,idUzytkownika);
             return adresaci;
-        }
-        else if (wybor == '4') {
+        } else if (wybor == '4') {
             cout<<"Obecny adres email to: "<<adresaci[i].nazwisko<<endl<<"Podaj nowy adres email: "<<endl;
             cin>>daneDoZmiany;
             adresaci[i].email=daneDoZmiany;
             nadpisywaniePlikuPoEdycji(adresaci, i,  idUzytkownika);
             return adresaci;
-        }
-        else if (wybor == '5') {
+        } else if (wybor == '5') {
             cout<<"Obecny adres to: "<<adresaci[i].nazwisko<<endl<<"Podaj nowy adres: "<<endl;
             cin>>daneDoZmiany;
             adresaci[i].adres=daneDoZmiany;
@@ -332,7 +335,7 @@ vector<Uzytkownik>odczytPlikuUzytkownicy() {
 
             uzytkownicy.push_back(Uzytkownik{idUzytkownika,login,haslo});
         }
-    } else cout<<"Brak zarejestrowanych uzytkownikow"<<endl;
+    }
     plik.close();
     return uzytkownicy;
 }
@@ -468,10 +471,12 @@ void rejestracjaUzytkownika(vector<Uzytkownik>uzytkownicy) {
     }
     cout<<"Podaj haslo: "<<endl;
     cin>>haslo;
-
+    if(uzytkownicy.size()>0)
     idUzytkonika= uzytkownicy[uzytkownicy.size()-1].idUzytkownika+1;
+    else idUzytkonika=1;
     fstream plik;
     plik.open("Uzytkownicy.txt",ios::out| ios::app);
+
     linia = "|" + login+ "|" + haslo +  "|";
 
     plik<<idUzytkonika;
