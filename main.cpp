@@ -15,6 +15,15 @@ struct Uzytkownik {
     string login, haslo;
 };
 
+void wypisanieAdresata(vector <Adresat> adresaci,int i) {
+    cout<< adresaci[i].imie<<endl;
+    cout<< adresaci[i].nazwisko<<endl;
+    cout<< adresaci[i].numerTelefonu<<endl;
+    cout<< adresaci[i].email<<endl;
+    cout<< adresaci[i].adres<<endl<<endl;
+}
+
+
 void nadpisywaniePlikuPoUsunieciu(int idAdresataDoZmiany) {
     string linia;
     fstream plik;
@@ -131,13 +140,12 @@ vector<Adresat> DodanieKontaktu(vector <Adresat> adresaci, int idUzytkownika) {
 
     fstream plik;
     plik.open("Ksiazka_kontaktow.txt",ios::in);
-    if(plik.good()==true)
-        {
-            while(getline(plik,linia))
-         {   polozenieZnaku = linia.find_first_of("|");
-        idAdresata = atoi(linia.substr(0,polozenieZnaku).c_str())+1;
-         }
+    if(plik.good()==true) {
+        while(getline(plik,linia)) {
+            polozenieZnaku = linia.find_first_of("|");
+            idAdresata = atoi(linia.substr(0,polozenieZnaku).c_str())+1;
         }
+    }
 
     else idAdresata =1;
     plik.close();
@@ -173,11 +181,7 @@ void wyszukanieKontaktuPoImieniu(vector <Adresat> adresaci) {
     for(int i=0; i<adresaci.size(); i++) {
         if(kontaktDoWyszukania==adresaci[i].imie) {
             cout<<"Kontakty z wybranym imieniem:"<<endl;
-            cout<< adresaci[i].imie<<endl;
-            cout<< adresaci[i].nazwisko<<endl;
-            cout<< adresaci[i].numerTelefonu<<endl;
-            cout<< adresaci[i].email<<endl;
-            cout<< adresaci[i].adres<<endl<<endl;
+            wypisanieAdresata(adresaci,i);
         }
     }
     cout<<endl<<"Wyszukanie zakonczone. Aby zakonczyc wyszukiwanie wcisnij dowolnu klawisz"<<endl;
@@ -192,11 +196,7 @@ void wyszukanieKontaktuPoNazwisku(vector <Adresat> adresaci) {
     for(int i=0; i<adresaci.size(); i++) {
         if(kontaktDoWyszukania==adresaci[i].nazwisko) {
             cout<<"Kontakty z wybranym nazwiskiem:"<<endl;
-            cout<< adresaci[i].imie<<endl;
-            cout<< adresaci[i].nazwisko<<endl;
-            cout<< adresaci[i].numerTelefonu<<endl;
-            cout<< adresaci[i].email<<endl;
-            cout<< adresaci[i].adres<<endl<<endl;
+            wypisanieAdresata(adresaci,i);
         }
     }
     cout<<endl<<"Wyszukanie zakonczone. Aby zakonczyc wyszukiwanie wcisnij dowolnu klawisz"<<endl;
@@ -207,11 +207,7 @@ void wyswietlanieWszystkichKontatkow(vector <Adresat> adresaci) {
     system("cls");
     for(int i=0; i<adresaci.size(); i++) {
         cout<< "numer adresata:"<<adresaci[i].idAdresata<<endl;
-        cout<< adresaci[i].imie<<endl;
-        cout<< adresaci[i].nazwisko<<endl;
-        cout<< adresaci[i].numerTelefonu<<endl;
-        cout<< adresaci[i].email<<endl;
-        cout<< adresaci[i].adres<<endl<<endl;
+        wypisanieAdresata(adresaci,i);
     }
     cout<<endl<<"Wyswietlanie zakonczone. Wcisnij dowolny klawisz by wrocic do poprzedniego menu "<<endl;
     system("pause");
@@ -229,11 +225,7 @@ vector<Adresat> usuniecieAdresata(vector <Adresat> adresaci) {
         if(numerDoUsuniecia==adresaci[i].idAdresata) {
             cout<<"Czy potwierdzasz usuniecie ponizszego adresata: "<<endl;
             cout<<"Potwierdzenie za pomoc¹ znaku t/T"<<endl;
-            cout<< adresaci[i].imie<<endl;
-            cout<< adresaci[i].nazwisko<<endl;
-            cout<< adresaci[i].numerTelefonu<<endl;
-            cout<< adresaci[i].email<<endl;
-            cout<< adresaci[i].adres<<endl<<endl;
+            wypisanieAdresata(adresaci,i);
 
             cin>>potwierdzenie;
             if(potwierdzenie=='t'||potwierdzenie=='T') {
@@ -385,7 +377,6 @@ void nadpisywaniePlikuUzytkownicy(vector<Uzytkownik> uzytkownicy) {
     plik.close();
 }
 
-
 vector<Uzytkownik> zmianaHasla(vector<Uzytkownik> uzytkownicy, int idUzytkownika) {
 
     string noweHaslo, powtorzoneNoweHaslo, stareHaslo;
@@ -453,7 +444,6 @@ int oknoPoZalogowaniu(int idUzytkownika, string login, vector<Uzytkownik>uzytkow
     }
 }
 
-
 void rejestracjaUzytkownika(vector<Uzytkownik>uzytkownicy) {
 
     int idUzytkonika;
@@ -472,7 +462,7 @@ void rejestracjaUzytkownika(vector<Uzytkownik>uzytkownicy) {
     cout<<"Podaj haslo: "<<endl;
     cin>>haslo;
     if(uzytkownicy.size()>0)
-    idUzytkonika= uzytkownicy[uzytkownicy.size()-1].idUzytkownika+1;
+        idUzytkonika= uzytkownicy[uzytkownicy.size()-1].idUzytkownika+1;
     else idUzytkonika=1;
     fstream plik;
     plik.open("Uzytkownicy.txt",ios::out| ios::app);
@@ -482,7 +472,6 @@ void rejestracjaUzytkownika(vector<Uzytkownik>uzytkownicy) {
     plik<<idUzytkonika;
     plik<<linia<<endl;
     plik.close();
-
 }
 
 int main() {
