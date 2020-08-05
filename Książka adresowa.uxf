@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>100</y>
+      <w>280</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>Ksiązka adresowa
+-
+-iUzytkownikMenedzer:uzytkownikMenedzer
+-
++rejestracjaUzytkownika():void
++wypiszWszystkichUzytkonikow():void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>870</x>
+      <y>120</y>
+      <w>210</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>Uzytkownik
+-
+-id : Integer
+-login: String
+-haslo: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>100</y>
+      <w>450</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>UzytkownikMenedzer
+-
+-idZalogowanegoUzytkownika: integer
+-uzytkownicy - vector &lt;Uzytkownik&gt;
+-
++rejestracjaUzytkownika():void
++wypiszWszystkichUzytkownikow():void 
++logowanieUzytkownika(): Integer
+-podajDaneNowegoUzytkownika(): Uzytkownik
+-pobierzIdNowegoUzytkownika(): Integer
+-czyIstniejeLogin():Bool
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>470</y>
+      <w>310</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>PlikZUzytkownikami
+-
+-nazwaPlikuZUzytkownikami - String
+- fsteram:plikTekstowy
+-
++PlikZUzytkownikami()
++dopiszUzytkownikaDoPliku(): void
+-czyPlikJestPusty():Bool
+- zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);\:String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>850</x>
+      <y>810</y>
+      <w>400</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>MetodyPomocnicze
+-
+-
+konwerjsaIntNaString():String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
