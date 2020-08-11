@@ -1,14 +1,102 @@
 #include "PlikZUzytkownikami.h"
 
-PlikZUzytkownikami::PlikZUzytkownikami()
+
+void PlikZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(Uzytkownik uzytkownicy)
 {
-    nazwaPlikuZUzytkownikami = "Uzytkownicy.txt";
+    fstream plikTekstowy;
+    string liniaZDanymiUzytkownika = "";
+    //vector <Uzytkownik>::iterator itrKoniec = --uzytkownicy.end();
+
+    plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), ios::out);
+
+    if (plikTekstowy.good() == true)
+    {
+        for (int i=0; i<1; i++)
+
+        {
+            liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownicy);
+
+            if (i<1)
+            {
+               plikTekstowy << liniaZDanymiUzytkownika;
+            }
+            else
+            {
+                plikTekstowy << liniaZDanymiUzytkownika << endl;
+            }
+            liniaZDanymiUzytkownika = "";
+        }
+    }
+    else
+    {
+        cout << "Nie mozna otworzyc pliku " << nazwaPlikuZUzytkownikami << endl;
+    }
+    plikTekstowy.close();
+}
+
+
+
+
+
+Uzytkownik PlikZUzytkownikami::pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami)
+{
+    Uzytkownik uzytkownik;
+    string pojedynczaDanaUzytkownika = "";
+    int numerPojedynczejDanejUzytkownika = 1;
+
+    for (int pozycjaZnaku = 0; pozycjaZnaku < daneJednegoUzytkownikaOddzielonePionowymiKreskami.length(); pozycjaZnaku++)
+    {
+        if (daneJednegoUzytkownikaOddzielonePionowymiKreskami[pozycjaZnaku] != '|')
+        {
+            pojedynczaDanaUzytkownika += daneJednegoUzytkownikaOddzielonePionowymiKreskami[pozycjaZnaku];
+        }
+        else
+        {
+            switch(numerPojedynczejDanejUzytkownika)
+            {
+            case 1:
+                uzytkownik.ustawId(atoi(pojedynczaDanaUzytkownika.c_str()));
+                break;
+            case 2:
+                uzytkownik.ustawLogin(pojedynczaDanaUzytkownika);
+                break;
+            case 3:
+                uzytkownik.ustawHaslo(pojedynczaDanaUzytkownika);
+                break;
+            }
+            pojedynczaDanaUzytkownika = "";
+            numerPojedynczejDanejUzytkownika++;
+        }
+    }
+    return uzytkownik;
+}
+
+vector <Uzytkownik> PlikZUzytkownikami::wczytajUzytkownikowZPliku()
+{
+    fstream plikTekstowy;
+    Uzytkownik uzytkownik;
+    vector <Uzytkownik> uzytkownicy;
+    string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
+
+
+    plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), ios::in);
+
+    if (plikTekstowy.good() == true)
+    {
+        while (getline(plikTekstowy, daneJednegoUzytkownikaOddzielonePionowymiKreskami))
+        {
+            uzytkownik = pobierzDaneUzytkownika(daneJednegoUzytkownikaOddzielonePionowymiKreskami);
+            uzytkownicy.push_back(uzytkownik);
+        }
+    }
+    plikTekstowy.close();
+    return uzytkownicy;
 }
 
 
 void PlikZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik)
 {
-
+    fstream plikTekstowy;
     string liniaZDanymiUzytkownika = "";
     plikTekstowy.open(nazwaPlikuZUzytkownikami.c_str(), ios::app);
 
@@ -32,7 +120,7 @@ void PlikZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik)
 
 
 bool PlikZUzytkownikami::czyPlikJestPusty()
-{
+{   fstream plikTekstowy;
     plikTekstowy.seekg(0, ios::end);
     if (plikTekstowy.tellg() == 0)
         return true;
