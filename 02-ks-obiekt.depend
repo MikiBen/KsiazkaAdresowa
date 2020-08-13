@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1597088583 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\main.cpp
+1597345240 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\main.cpp
 	<iostream>
 	"KsiazkaAdresowa.h"
 
-1597090150 c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\ksiazkaadresowa.h
+1597351202 c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\ksiazkaadresowa.h
 	<iostream>
 	"UzytkownicyMenedzer.h"
 
@@ -13,37 +13,51 @@
 1596143513 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\uzytkownik.cpp
 	"Uzytkownik.h"
 
-1597088294 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\metodypomocnicze.cpp
+1597346652 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\metodypomocnicze.cpp
 	"MetodyPomocnicze.h"
 	<fstream>
 	<sstream>
 
-1597088664 c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\metodypomocnicze.h
+1597347161 c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\metodypomocnicze.h
 	<iostream>
 	"Uzytkownik.h"
 
-1597092849 c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\uzytkownicymenedzer.h
+1597351261 c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\uzytkownicymenedzer.h
 	<iostream>
 	<vector>
 	<windows.h>
 	<fstream>
 	<sstream>
+	"Adresat.h"
 	"Uzytkownik.h"
 	"PlikZUzytkownikami.h"
 
-1597090159 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\ksiazkaadresowa.cpp
+1597349305 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\ksiazkaadresowa.cpp
 	"KsiazkaAdresowa.h"
 
-1597092200 c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\plikzuzytkownikami.h
+1597348301 c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\plikzuzytkownikami.h
 	<iostream>
 	<vector>
 	<fstream>
 	"Uzytkownik.h"
 	"MetodyPomocnicze.h"
 
-1597091615 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\plikzuzytkownikami.cpp
+1597174603 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\plikzuzytkownikami.cpp
 	"PlikZUzytkownikami.h"
 
-1597090150 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\uzytkownicymenedzer.cpp
+1597349666 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\uzytkownicymenedzer.cpp
 	"UzytkownicyMenedzer.h"
+
+1597348301 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\adresaci.cpp
+	"Adresaci.h"
+
+1597349418 c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\adresaci.h
+	<iostream>
+	"MetodyPomocnicze.h"
+
+1597351202 c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\adresat.h
+	<iostream>
+
+1597351251 source:c:\users\miki\documents\zadania przyszly programista\seminaria\ksi¹¿ka adresowa 6 seminarium\ksi¹¿ka adresowa 6 seminarium\adresat.cpp
+	"Adresat.h"
 

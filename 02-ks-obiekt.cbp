@@ -34,6 +34,12 @@
 		</Compiler>
 		<Unit filename="KsiazkaAdresowa.cpp" />
 		<Unit filename="KsiazkaAdresowa.h" />
+		<Unit filename="MetodyPomocnicze.cpp" />
+		<Unit filename="MetodyPomocnicze.h" />
+		<Unit filename="PlikZUzytkownikami.cpp" />
+		<Unit filename="PlikZUzytkownikami.h" />
+		<Unit filename="UzytkownicyMenedzer.cpp" />
+		<Unit filename="UzytkownicyMenedzer.h" />
 		<Unit filename="Uzytkownik.cpp" />
 		<Unit filename="Uzytkownik.h" />
 		<Unit filename="main.cpp" />

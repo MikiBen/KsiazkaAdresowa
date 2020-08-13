@@ -13,12 +13,19 @@ class MetodyPomocnicze
 {
     public:
     static string konwerjsaIntNaString(int liczba);
-    static string wczytajLinie();
+   static string wczytajLinie();
+
+
+    static char wybierzOpcjeZMenuUzytkownika();
+    private:
+    static char wczytajZnak();
+
+
 };
 
 
 
 
 
-
 #endif
+

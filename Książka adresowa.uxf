@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>100</y>
+      <x>20</x>
+      <y>0</y>
       <w>280</w>
       <h>310</h>
     </coordinates>
@@ -13,15 +13,14 @@
 -
 -iUzytkownikMenedzer:uzytkownikMenedzer
 -
-+rejestracjaUzytkownika():void
-+wypiszWszystkichUzytkonikow():void</panel_attributes>
+KsiazkaAdresowa() XXXX</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>870</x>
-      <y>120</y>
+      <x>130</x>
+      <y>520</y>
       <w>210</w>
       <h>290</h>
     </coordinates>
@@ -35,8 +34,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>100</y>
+      <x>320</x>
+      <y>0</y>
       <w>450</w>
       <h>340</h>
     </coordinates>
@@ -45,40 +44,49 @@
 -idZalogowanegoUzytkownika: integer
 -uzytkownicy - vector &lt;Uzytkownik&gt;
 -
+-
 +rejestracjaUzytkownika():void
 +wypiszWszystkichUzytkownikow():void 
 +logowanieUzytkownika(): Integer
++wczytajUzytkownikowZPliku() : void 
 -podajDaneNowegoUzytkownika(): Uzytkownik
 -pobierzIdNowegoUzytkownika(): Integer
 -czyIstniejeLogin():Bool
+- panelZAdresatami(): void
 
-</panel_attributes>
++ logowanieUzytkownika() Integer NOWE
++ zmianaHaslaZalogowanegoUzytkownika(): Void
++ wylogowanieSieUzytkownika(): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>810</x>
-      <y>470</y>
-      <w>310</w>
+      <x>410</x>
+      <y>410</y>
+      <w>500</w>
       <h>230</h>
     </coordinates>
     <panel_attributes>PlikZUzytkownikami
 -
 -nazwaPlikuZUzytkownikami - String
 - fsteram:plikTekstowy
+- daneJednegoUzytkownikaOddzielonePionowymiKreskami:string xxxxx
 -
 +PlikZUzytkownikami()
 +dopiszUzytkownikaDoPliku(): void
++ wczytajUzytkownikowZPliku: vector &lt;Uzytkownik&gt; XXXX
+- pobierzDaneUzytkownika(): vector&lt;Uzytkownik&gt;XXXX
 -czyPlikJestPusty():Bool
-- zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);\:String</panel_attributes>
+- zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);\:String
++ zapiszWszystkichUzytkownikowDoPliku(): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>850</x>
-      <y>810</y>
+      <x>430</x>
+      <y>710</y>
       <w>400</w>
       <h>240</h>
     </coordinates>
@@ -86,7 +94,29 @@
 -
 -
 konwerjsaIntNaString():String
-</panel_attributes>
+
++ wczytajLinie(): String
++ wybierzOpcjeZMenuUzytkownika(): char
+- wczytajZnak() char</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1000</x>
+      <y>520</y>
+      <w>210</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>Adresat
+-
+-id : Integer
+-idUzytkownika: Integer
+-imie: String
+-nazwisko: String
+-numerTelefonu: String
+-email: String
+-adres: String</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

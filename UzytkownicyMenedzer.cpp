@@ -6,6 +6,11 @@ void UzytkownikMenedzer::wczytajUzytkownikowZPliku()
     uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
 }
 
+void UzytkownikMenedzer::wylogowanieSieUzytkownika()
+{
+    idZalogowanegoUzytkownika=0;
+}
+
 
 void UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika()
 {
@@ -29,7 +34,7 @@ void UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika()
    plikZUzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
     //plikZUzytkownikami.dopiszUzytkownikaDoPliku(uzytkownik);
 
-        stworzyc ta funkcje w uzytkoniwk menedzer
+       // stworzyc ta funkcje w uzytkoniwk menedzer
 }
 
 
@@ -56,19 +61,21 @@ void UzytkownikMenedzer::logowanieUzytkownika()
                     cout << endl << "Zalogowales sie." << endl << endl;
                     idZalogowanegoUzytkownika = uzytkownicy[i].pobierzId();
                     system("pause");
+UzytkownikMenedzer::panelZAdresatami();
+                    //adresaci.panelZAdresatami();
+                    return;
 
-                    exit(0);
                 }
             }
             cout << "Wprowadzono 3 razy bledne haslo." << endl;
             system("pause");
-            exit(0);
+            return;
         }
 
     }
     cout << "Nie ma uzytkownika z takim loginem" << endl << endl;
     system("pause");
-    exit(0);
+    return;
 }
 
 
@@ -138,6 +145,45 @@ void UzytkownikMenedzer::wypiszWszystkichUzytkonikow()
         cout<<uzytkownicy[i].pobierzLogin()<<endl;
         cout<<uzytkownicy[i].pobierzHaslo()<<endl;
     }
+}
+
+void UzytkownikMenedzer::panelZAdresatami()
+{
+        char wybor;
+        while(true)
+        {
+                wybor = MetodyPomocnicze::wybierzOpcjeZMenuUzytkownika();
+                    switch (wybor)
+            {
+            case '1':
+                //idOstatniegoAdresata = dodajAdresata(adresaci, idZalogowanegoUzytkownika, idOstatniegoAdresata);
+                break;
+            case '2':
+                //wyszukajAdresatowPoImieniu(adresaci);
+                break;
+            case '3':
+               // wyszukajAdresatowPoNazwisku(adresaci);
+                break;
+            case '4':
+               // wyswietlWszystkichAdresatow(adresaci);
+                break;
+            case '5':
+               // idUsunietegoAdresata = usunAdresata(adresaci);
+               // idOstatniegoAdresata = podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(idUsunietegoAdresata, idOstatniegoAdresata);
+                break;
+            case '6':
+                //edytujAdresata(adresaci);
+                break;
+            case '7':
+                 UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika();
+                break;
+            case '8':
+                UzytkownikMenedzer::wylogowanieSieUzytkownika();
+               // adresaci.clear();
+                return;
+            }
+        }
+
 }
 
 
