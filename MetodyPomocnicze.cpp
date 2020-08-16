@@ -1,6 +1,7 @@
 #include "MetodyPomocnicze.h"
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 string MetodyPomocnicze::konwerjsaIntNaString(int liczba)
 {
@@ -40,6 +41,16 @@ char MetodyPomocnicze::wybierzOpcjeZMenuUzytkownika()
     return wybor;
 }
 
+string MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst)
+{
+    if (!tekst.empty())
+    {
+        transform(tekst.begin(), tekst.end(), tekst.begin(), ::tolower);
+        tekst[0] = toupper(tekst[0]);
+    }
+    return tekst;
+}
+
 char MetodyPomocnicze::wczytajZnak()
 {
         string wejscie = "";
@@ -57,4 +68,33 @@ char MetodyPomocnicze::wczytajZnak()
         cout << "To nie jest pojedynczy znak. Wpisz ponownie." << endl;
     }
     return znak;
+}
+
+
+int MetodyPomocnicze::pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami)
+{
+
+    int pozycjaRozpoczeciaIdUzytkownika = daneJednegoAdresataOddzielonePionowymiKreskami.find_first_of('|') + 1;
+    int idUzytkownika = konwersjaStringNaInt(pobierzLiczbe(daneJednegoAdresataOddzielonePionowymiKreskami, pozycjaRozpoczeciaIdUzytkownika));
+return idUzytkownika;
+}
+
+int MetodyPomocnicze::konwersjaStringNaInt(string liczba)
+{
+    int liczbaInt;
+    istringstream iss(liczba);
+    iss >> liczbaInt;
+
+    return liczbaInt;
+}
+
+string MetodyPomocnicze::pobierzLiczbe(string tekst, int pozycjaZnaku)
+{
+    string liczba = "";
+    while(isdigit(tekst[pozycjaZnaku]) == true)
+    {
+        liczba += tekst[pozycjaZnaku];
+        pozycjaZnaku ++;
+    }
+    return liczba;
 }

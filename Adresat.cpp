@@ -36,9 +36,6 @@ void Adresat::ustawNumerTelefonu(string nowyNumerTelefonu)
 }
 
 
-
-
-
 int Adresat::pobierzId()
 {
     return id;

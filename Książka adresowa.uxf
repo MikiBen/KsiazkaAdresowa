@@ -19,8 +19,8 @@ KsiazkaAdresowa() XXXX</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>130</x>
-      <y>520</y>
+      <x>1090</x>
+      <y>70</y>
       <w>210</w>
       <h>290</h>
     </coordinates>
@@ -42,8 +42,9 @@ KsiazkaAdresowa() XXXX</panel_attributes>
     <panel_attributes>UzytkownikMenedzer
 -
 -idZalogowanegoUzytkownika: integer
+-idOstatniegoAdresata: integer
 -uzytkownicy - vector &lt;Uzytkownik&gt;
--
+-adresaci - vector &lt;Adresat&gt;
 -
 +rejestracjaUzytkownika():void
 +wypiszWszystkichUzytkownikow():void 
@@ -53,17 +54,21 @@ KsiazkaAdresowa() XXXX</panel_attributes>
 -pobierzIdNowegoUzytkownika(): Integer
 -czyIstniejeLogin():Bool
 - panelZAdresatami(): void
+- zamienPierwszaLitereNaDuzaAPozostaleNaMale(); string
+- dopiszAdresataDoPliku(): Coid
 
 + logowanieUzytkownika() Integer NOWE
 + zmianaHaslaZalogowanegoUzytkownika(): Void
-+ wylogowanieSieUzytkownika(): void</panel_attributes>
++ wylogowanieSieUzytkownika(): void
+
++dodajAdresata(): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>410</x>
-      <y>410</y>
+      <x>90</x>
+      <y>390</y>
       <w>500</w>
       <h>230</h>
     </coordinates>
@@ -103,8 +108,8 @@ konwerjsaIntNaString():String
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1000</x>
-      <y>520</y>
+      <x>870</x>
+      <y>70</y>
       <w>210</w>
       <h>290</h>
     </coordinates>
@@ -117,6 +122,21 @@ konwerjsaIntNaString():String
 -numerTelefonu: String
 -email: String
 -adres: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>400</y>
+      <w>500</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>PlikZAdresatami
+-
+
+-
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

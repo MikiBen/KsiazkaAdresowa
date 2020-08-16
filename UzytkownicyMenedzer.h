@@ -12,32 +12,45 @@
 
 #include "Uzytkownik.h"
 #include "PlikZUzytkownikami.h"
+#include "PlikZAdresatami.h"
 
 using namespace std;
 class UzytkownikMenedzer
 {
     int idZalogowanegoUzytkownika;
+    int idOstatniegoAdresata;
     vector <Uzytkownik> uzytkownicy;
+    vector <Adresat> adresaci;
+   // Adresat adresat;
 
 
     Uzytkownik podajDaneNowegoUzytkownika();
     int pobierzIdNowegoUzytkownika();
     bool czyIstniejeLogin(string login);
     PlikZUzytkownikami plikZUzytkownikami;
+    PlikZAdresatami plikZAdresatami;
+    Adresat podajDaneNowegoAdresata();
+    void wczytajAdresatowZalogowanegoUzytkownikaZPliku();
+    void pobierzIdOstatniegoAdresat();
+    void wyswietlWszystkichAdresatow();
 
+    //void dopiszAdresataDoPliku(dopiszAdresataDoPliku);
 
 public:
 
     UzytkownikMenedzer(string nazwaPlikuZUzytkownikami): plikZUzytkownikami(nazwaPlikuZUzytkownikami){};
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkonikow();
-         //wczytajUzytkownikowZPliku
+
     void wczytajUzytkownikowZPliku();
     void logowanieUzytkownika();
     void zmianaHaslaZalogowanegoUzytkownika();
 
     void wylogowanieSieUzytkownika();
     void panelZAdresatami();
+
+
+    void dodajAdresata();
 
 };
 
