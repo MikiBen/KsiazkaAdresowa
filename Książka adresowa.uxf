@@ -37,7 +37,7 @@ KsiazkaAdresowa() XXXX</panel_attributes>
       <x>320</x>
       <y>0</y>
       <w>450</w>
-      <h>340</h>
+      <h>380</h>
     </coordinates>
     <panel_attributes>UzytkownikMenedzer
 -
@@ -53,7 +53,7 @@ KsiazkaAdresowa() XXXX</panel_attributes>
 -podajDaneNowegoUzytkownika(): Uzytkownik
 -pobierzIdNowegoUzytkownika(): Integer
 -czyIstniejeLogin():Bool
-- panelZAdresatami(): void
++ panelZAdresatami(): void
 - zamienPierwszaLitereNaDuzaAPozostaleNaMale(); string
 - dopiszAdresataDoPliku(): Coid
 
@@ -74,16 +74,17 @@ KsiazkaAdresowa() XXXX</panel_attributes>
     </coordinates>
     <panel_attributes>PlikZUzytkownikami
 -
--nazwaPlikuZUzytkownikami - String
-- fsteram:plikTekstowy
-- daneJednegoUzytkownikaOddzielonePionowymiKreskami:string xxxxx
+-NAZWA_PLIKU_Z_UZYTKOWNIKAMI - String
+- daneJednegoUzytkownikaOddzielonePionowymiKreskami:string 
 -
-+PlikZUzytkownikami()
-+dopiszUzytkownikaDoPliku(): void
-+ wczytajUzytkownikowZPliku: vector &lt;Uzytkownik&gt; XXXX
-- pobierzDaneUzytkownika(): vector&lt;Uzytkownik&gt;XXXX
--czyPlikJestPusty():Bool
 - zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);\:String
++PlikZUzytkownikami()
+- pobierzDaneUzytkownika(): vector&lt;Uzytkownik&gt;
++dopiszUzytkownikaDoPliku(): void
++ wczytajUzytkownikowZPliku: vector &lt;Uzytkownik&gt;
+
+-czyPlikJestPusty():Bool
+
 + zapiszWszystkichUzytkownikowDoPliku(): void</panel_attributes>
     <additional_attributes/>
   </element>
@@ -97,12 +98,14 @@ KsiazkaAdresowa() XXXX</panel_attributes>
     </coordinates>
     <panel_attributes>MetodyPomocnicze
 -
--
-konwerjsaIntNaString():String
-
++konwerjsaIntNaString():String
++ zamienPierwszaLitereNaDuzaAPozostaleNaMale(): String
++ pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskam(): integer
 + wczytajLinie(): String
 + wybierzOpcjeZMenuUzytkownika(): char
-- wczytajZnak() char</panel_attributes>
+- wczytajZnak() char
+- konwersjaStringNaInt() integer
+- pobierzLiczbe(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -134,9 +137,14 @@ konwerjsaIntNaString():String
     </coordinates>
     <panel_attributes>PlikZAdresatami
 -
-
+nazwaPlikuZAdresatami -String
+adresat Adresat
 -
-</panel_attributes>
+-czyPlikJestPusty(): bool
+- zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(): string
++ wczytajAdresatowZalogowanegoUzytkownikaZPliku() vector &lt;Adresat&gt;
++ dopiszAdresataDoPliku(): Void
++ PlikZAdresatami()</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

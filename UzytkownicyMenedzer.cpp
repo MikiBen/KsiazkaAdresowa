@@ -1,10 +1,7 @@
 #include "UzytkownicyMenedzer.h"
 
 
-void UzytkownikMenedzer::wczytajUzytkownikowZPliku()
-{
-    uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
-}
+
 
 void UzytkownikMenedzer::wylogowanieSieUzytkownika()
 {
@@ -28,7 +25,7 @@ void UzytkownikMenedzer::dodajAdresata()
     adresaci.push_back(adresat);
     plikZAdresatami.dopiszAdresataDoPliku(adresat);
 
-    ++idOstatniegoAdresata;
+    idOstatniegoAdresata;
 }
 
 

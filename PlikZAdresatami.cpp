@@ -19,11 +19,11 @@ void PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat)
 
         if (PlikZAdresatami::czyPlikJestPusty() == true)
         {
-            plikTekstowy << liniaZDanymiAdresata;
+            plikTekstowy << liniaZDanymiAdresata<< endl;
         }
         else
         {
-            plikTekstowy << endl << liniaZDanymiAdresata ;
+            plikTekstowy  << liniaZDanymiAdresata<< endl ;
         }
     }
     else
@@ -38,7 +38,7 @@ bool PlikZAdresatami::czyPlikJestPusty()
 {
     fstream plikTekstowy;
     plikTekstowy.seekg(0, ios::end);
-    if (plikTekstowy.tellg() == 0)
+    if (plikTekstowy.good()==false)
         return true;
     else
         return false;
