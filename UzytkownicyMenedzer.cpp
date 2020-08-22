@@ -3,6 +3,8 @@
 
 
 
+
+
 void UzytkownikMenedzer::wylogowanieSieUzytkownika()
 {
     idZalogowanegoUzytkownika=0;
@@ -12,6 +14,11 @@ void UzytkownikMenedzer::wylogowanieSieUzytkownika()
 void UzytkownikMenedzer::wczytajAdresatowZalogowanegoUzytkownikaZPliku()
 {
     adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
+}
+
+void UzytkownikMenedzer::wczytajAdresatowWszystkichUzytkownikowZPliku()
+{
+    adresaciWszyscy = plikZAdresatami.wczytajAdresatowWszystkichUzytkownikowZPliku();
 }
 
 void UzytkownikMenedzer::dodajAdresata()
@@ -25,7 +32,7 @@ void UzytkownikMenedzer::dodajAdresata()
     adresaci.push_back(adresat);
     plikZAdresatami.dopiszAdresataDoPliku(adresat);
 
-    idOstatniegoAdresata;
+    //idOstatniegoAdresata;
 }
 
 
@@ -198,11 +205,12 @@ void UzytkownikMenedzer::wypiszWszystkichUzytkonikow()
 void UzytkownikMenedzer::pobierzIdOstatniegoAdresat()
 {
     int liczbaAdresatow;
-
-    liczbaAdresatow =   adresaci.size()-1;
+    //jeśli chcemy indwidualne naliczanie adresatów to użyjmy vector adresaci
+    wczytajAdresatowWszystkichUzytkownikowZPliku();
+    liczbaAdresatow =   adresaciWszyscy.size()-1;
 
     if(liczbaAdresatow >0)
-        idOstatniegoAdresata = adresaci[liczbaAdresatow].pobierzId();
+        idOstatniegoAdresata = adresaciWszyscy[liczbaAdresatow].pobierzId();
     else idOstatniegoAdresata = 0;
 
 
@@ -262,7 +270,7 @@ void UzytkownikMenedzer::panelZAdresatami()
             wyswietlWszystkichAdresatow();
             break;
         case '5':
-            // idUsunietegoAdresata = usunAdresata(adresaci);
+            usuniecieAdresata();
             // idOstatniegoAdresata = podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(idUsunietegoAdresata, idOstatniegoAdresata);
             break;
         case '6':
@@ -280,8 +288,78 @@ void UzytkownikMenedzer::panelZAdresatami()
 
 }
 
+void UzytkownikMenedzer::usuniecieAdresata()
+{
+    int numerDoUsuniecia;
+    char potwierdzenie;
+    system("cls");
+    cout<<"Podaj numer id kontaktu do usuniecia: "<<endl;
+    cin>>numerDoUsuniecia;
+
+
+    //sprawdzenie czy należy adresat do użytkownika
+
+    for(int i=0; i<adresaci.size(); i++)
+    {
+        if(numerDoUsuniecia==adresaci[i].pobierzId())
+        {
+            cout<<"Czy potwierdzasz usuniecie ponizszego adresata: "<<endl;
+            cout<<"Potwierdzenie za pomoc¹ znaku t/T"<<endl;
+            wypisanieAdresata(i);
+
+            cin>>potwierdzenie;
+            if(potwierdzenie=='t'||potwierdzenie=='T')
+            {
+                adresaci.erase(adresaci.begin()+i);
+                nadpisywaniePlikuPoUsunieciu(numerDoUsuniecia);
+                cout<<endl<<"Usunieto adresata. Wcisnij dowolny klawisz by wrocic do menu glownego "<<endl;
+                system("pause");
+                return;
+            }
+            else return;
+
+        }
+    }
+    cout<<endl<<"Brak adresata o takim ID "<<endl;
+    system("pause");
+}
 
 
 
+void UzytkownikMenedzer::wypisanieAdresata(int i)
+{
+    cout<< adresaci[i].pobierzImie()<<endl;
 
+    cout<< adresaci[i].pobierzNazwisko()<<endl;
+    cout<< adresaci[i].pobierzNumerTelefonu()<<endl;
+    cout<< adresaci[i].pobierzEmail()<<endl;
+    cout<< adresaci[i].pobierzAdres()<<endl<<endl;
+}
 
+void UzytkownikMenedzer::nadpisywaniePlikuPoUsunieciu(int idAdresataDoZmiany)
+{
+    string linia;
+    fstream plik;
+    fstream plikTymczasowy;
+    int idAdresata,polozenieZnaku;
+    plik.open("Adresaci.txt",ios::in);
+    plikTymczasowy.open("Adresaci_tymczasowy.txt",ios::out| ios::app);
+
+    while(getline(plik,linia))
+    {
+        polozenieZnaku = linia.find_first_of("|");
+        idAdresata = atoi(linia.substr(0,polozenieZnaku).c_str());
+
+        if(idAdresataDoZmiany!=idAdresata)
+        {
+
+            plikTymczasowy<<linia<<endl;
+        }
+    }
+
+    plik.close();
+    remove ("Adresaci.txt");
+    plikTymczasowy.close();
+
+    rename("Adresaci_tymczasowy.txt","Adresaci.txt");
+}
