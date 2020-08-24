@@ -19,8 +19,14 @@ class MetodyPomocnicze
 
     static char wybierzOpcjeZMenuUzytkownika();
     static string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
-    static int pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
 
+    static int pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
+    static int pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
+    static int wczytajLiczbeCalkowita();
+    static char wybierzOpcjeZMenuEdycja();
+    static string zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(Adresat adresat);
+    static void wyswietlDaneAdresata(Adresat adresat);
+    static void wyswietlIloscWyszukanychAdresatow(int iloscAdresatow);
     private:
     static char wczytajZnak();
     static int konwersjaStringNaInt(string liczba);

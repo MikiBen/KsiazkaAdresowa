@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+//#include <sctdio.h>
 
 #include "Adresat.h"
 #include "Uzytkownik.h"
@@ -25,16 +26,11 @@ public:
     vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
     vector <Adresat> wczytajAdresatowWszystkichUzytkownikowZPliku();
     void dopiszAdresataDoPliku(Adresat adresat);
-   // PlikZAdresatami();
+    void nadpisywaniePlikuPoUsunieciu(int idAdresataDoZmiany);
 
     PlikZAdresatami(string nazwaPliku) : PlikTekstowy(nazwaPliku) {};
-   // PlikZAdresatami(string nazwaPliku) : PlikTekstowy(nazwaPliku) {};
-    /*PlikZUzytkownikami(string nazwa):nazwaPlikuZUzytkownikami(nazwa){};
-
-    void dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik);
-    vector <Uzytkownik> wczytajUzytkownikowZPliku();
-    void zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> uzytkownicy);
-    */
+    int zwrocNumerLiniiSzukanegoAdresata(int idAdresata);
+    void edytujWybranaLinieWPliku(int numerEdytowanejLinii, string liniaZDanymiAdresataOddzielonePionowymiKreskami);
 };
 
 #endif

@@ -1,69 +1,10 @@
 #include "UzytkownicyMenedzer.h"
 
-
-
-
-
-
 void UzytkownikMenedzer::wylogowanieSieUzytkownika()
 {
     idZalogowanegoUzytkownika=0;
-    adresaci.clear();
+    //adresaci.clear();
 }
-
-void UzytkownikMenedzer::wczytajAdresatowZalogowanegoUzytkownikaZPliku()
-{
-    adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
-}
-
-void UzytkownikMenedzer::wczytajAdresatowWszystkichUzytkownikowZPliku()
-{
-    adresaciWszyscy = plikZAdresatami.wczytajAdresatowWszystkichUzytkownikowZPliku();
-}
-
-void UzytkownikMenedzer::dodajAdresata()
-{
-    Adresat adresat;
-
-    system("cls");
-    cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
-    adresat = podajDaneNowegoAdresata();
-
-    adresaci.push_back(adresat);
-    plikZAdresatami.dopiszAdresataDoPliku(adresat);
-
-    //idOstatniegoAdresata;
-}
-
-
-
-Adresat UzytkownikMenedzer::podajDaneNowegoAdresata()
-{
-    Adresat adresat;
-
-    adresat.ustawId( ++idOstatniegoAdresata);
-    adresat.ustawIdUzytkownika(idZalogowanegoUzytkownika);
-
-    cout << "Podaj imie: ";
-    adresat.ustawImie(MetodyPomocnicze::wczytajLinie());
-    adresat.ustawImie(MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresat.pobierzImie()));
-
-    cout << "Podaj nazwisko: ";
-    adresat.ustawNazwisko(MetodyPomocnicze::wczytajLinie());
-    adresat.ustawNazwisko(MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresat.pobierzNazwisko()));
-
-    cout << "Podaj numer telefonu: ";
-    adresat.ustawNumerTelefonu(MetodyPomocnicze::wczytajLinie());
-
-    cout << "Podaj email: ";
-    adresat.ustawEmail(MetodyPomocnicze::wczytajLinie());
-
-    cout << "Podaj adres: ";
-    adresat.ustawAdres(MetodyPomocnicze::wczytajLinie());
-
-    return adresat;
-}
-
 
 
 
@@ -116,7 +57,7 @@ void UzytkownikMenedzer::logowanieUzytkownika()
                     cout << endl << "Zalogowales sie." << endl << endl;
                     idZalogowanegoUzytkownika = uzytkownicy[i].pobierzId();
                     system("pause");
-                    UzytkownikMenedzer::panelZAdresatami();
+                    panelZAdresatami();
                     //adresaci.panelZAdresatami();
                     return;
 
@@ -202,53 +143,12 @@ void UzytkownikMenedzer::wypiszWszystkichUzytkonikow()
     }
 }
 
-void UzytkownikMenedzer::pobierzIdOstatniegoAdresat()
-{
-    int liczbaAdresatow;
-    //jeśli chcemy indwidualne naliczanie adresatów to użyjmy vector adresaci
-    wczytajAdresatowWszystkichUzytkownikowZPliku();
-    liczbaAdresatow =   adresaciWszyscy.size()-1;
-
-    if(liczbaAdresatow >0)
-        idOstatniegoAdresata = adresaciWszyscy[liczbaAdresatow].pobierzId();
-    else idOstatniegoAdresata = 0;
-
-
-}
-
-
-void UzytkownikMenedzer::wyswietlWszystkichAdresatow()
-{
-    system("cls");
-    if (!adresaci.empty())
-    {
-        cout << "             >>> ADRESACI <<<" << endl;
-        cout << "-----------------------------------------------" << endl;
-        {
-            for (int i=0; i<adresaci.size(); i++)
-            {
-                cout<<adresaci[i].pobierzId()<<endl;
-                cout<<adresaci[i].pobierzImie()<<endl;
-                cout<<adresaci[i].pobierzNazwisko()<<endl;
-                cout<<adresaci[i].pobierzNumerTelefonu()<<endl;
-                cout<<adresaci[i].pobierzEmail()<<endl;
-                cout<<adresaci[i].pobierzAdres()<<endl;
-            }
-        }
-    }
-    else
-    {
-        cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
-    }
-    system("pause");
-}
-
-
 void UzytkownikMenedzer::panelZAdresatami()
 {
     char wybor;
-    wczytajAdresatowZalogowanegoUzytkownikaZPliku();
-    pobierzIdOstatniegoAdresat();
+    //int idZalogowanegoUzytkownika = id;
+    adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
+    adresatMenedzer.pobierzIdOstatniegoAdresat();
 
 
     while(true)
@@ -258,108 +158,41 @@ void UzytkownikMenedzer::panelZAdresatami()
         switch (wybor)
         {
         case '1':
-            dodajAdresata();
+            adresatMenedzer.dodajAdresata(idZalogowanegoUzytkownika);
             break;
         case '2':
-            //wyszukajAdresatowPoImieniu(adresaci);
+            adresatMenedzer.wyszukajAdresatowPoImieniu();
             break;
         case '3':
-            // wyszukajAdresatowPoNazwisku(adresaci);
+            adresatMenedzer.wyszukajAdresatowPoNazwisku();
             break;
         case '4':
-            wyswietlWszystkichAdresatow();
+            adresatMenedzer.wyswietlWszystkichAdresatow(idZalogowanegoUzytkownika);
             break;
         case '5':
-            usuniecieAdresata();
+            adresatMenedzer.usuniecieAdresata();
             // idOstatniegoAdresata = podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(idUsunietegoAdresata, idOstatniegoAdresata);
             break;
         case '6':
-            //edytujAdresata(adresaci);
+            adresatMenedzer.edytujAdresata();
             break;
         case '7':
-            UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika();
+            zmianaHaslaZalogowanegoUzytkownika();
             break;
         case '8':
-            UzytkownikMenedzer::wylogowanieSieUzytkownika();
-            // adresaci.clear();
+
+           wylogowanieSieUzytkownika();
+             //adresaci.clear();
             return;
         }
     }
 
 }
 
-void UzytkownikMenedzer::usuniecieAdresata()
-{
-    int numerDoUsuniecia;
-    char potwierdzenie;
-    system("cls");
-    cout<<"Podaj numer id kontaktu do usuniecia: "<<endl;
-    cin>>numerDoUsuniecia;
-
-
-    //sprawdzenie czy należy adresat do użytkownika
-
-    for(int i=0; i<adresaci.size(); i++)
-    {
-        if(numerDoUsuniecia==adresaci[i].pobierzId())
-        {
-            cout<<"Czy potwierdzasz usuniecie ponizszego adresata: "<<endl;
-            cout<<"Potwierdzenie za pomoc¹ znaku t/T"<<endl;
-            wypisanieAdresata(i);
-
-            cin>>potwierdzenie;
-            if(potwierdzenie=='t'||potwierdzenie=='T')
-            {
-                adresaci.erase(adresaci.begin()+i);
-                nadpisywaniePlikuPoUsunieciu(numerDoUsuniecia);
-                cout<<endl<<"Usunieto adresata. Wcisnij dowolny klawisz by wrocic do menu glownego "<<endl;
-                system("pause");
-                return;
-            }
-            else return;
-
-        }
-    }
-    cout<<endl<<"Brak adresata o takim ID "<<endl;
-    system("pause");
-}
 
 
 
-void UzytkownikMenedzer::wypisanieAdresata(int i)
-{
-    cout<< adresaci[i].pobierzImie()<<endl;
 
-    cout<< adresaci[i].pobierzNazwisko()<<endl;
-    cout<< adresaci[i].pobierzNumerTelefonu()<<endl;
-    cout<< adresaci[i].pobierzEmail()<<endl;
-    cout<< adresaci[i].pobierzAdres()<<endl<<endl;
-}
 
-void UzytkownikMenedzer::nadpisywaniePlikuPoUsunieciu(int idAdresataDoZmiany)
-{
-    string linia;
-    fstream plik;
-    fstream plikTymczasowy;
-    int idAdresata,polozenieZnaku;
-    plik.open("Adresaci.txt",ios::in);
-    plikTymczasowy.open("Adresaci_tymczasowy.txt",ios::out| ios::app);
 
-    while(getline(plik,linia))
-    {
-        polozenieZnaku = linia.find_first_of("|");
-        idAdresata = atoi(linia.substr(0,polozenieZnaku).c_str());
 
-        if(idAdresataDoZmiany!=idAdresata)
-        {
-
-            plikTymczasowy<<linia<<endl;
-        }
-    }
-
-    plik.close();
-    remove ("Adresaci.txt");
-    plikTymczasowy.close();
-
-    rename("Adresaci_tymczasowy.txt","Adresaci.txt");
-}

@@ -46,7 +46,7 @@ int main()
     while (true)
     {
             wybor = wybierzOpcjeZMenuGlownego();
-            KsiazkaAdresowa ksiazkaAdresowa ("Uzytkownicy.txt","Adresaci");
+            KsiazkaAdresowa ksiazkaAdresowa ("Uzytkownicy.txt","Adresaci.txt");
 
             switch (wybor)
             {

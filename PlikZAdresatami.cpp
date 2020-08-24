@@ -170,3 +170,102 @@ vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(
         }
         return adresat;
     }
+
+
+    void PlikZAdresatami::nadpisywaniePlikuPoUsunieciu(int idAdresataDoZmiany)
+{
+    string linia;
+    fstream plik;
+    fstream plikTymczasowy;
+ //pobierzNazwePliku();
+    int idAdresata,polozenieZnaku;
+    plik.open(pobierzNazwePliku(),ios::in);
+    plikTymczasowy.open( pobierzNazwePliku() + "_tymczasowy.txt",ios::out| ios::app);
+
+    while(getline(plik,linia))
+    {
+        polozenieZnaku = linia.find_first_of("|");
+        idAdresata = atoi(linia.substr(0,polozenieZnaku).c_str());
+
+        if(idAdresataDoZmiany!=idAdresata)
+        {
+
+            plikTymczasowy<<linia<<endl;
+        }
+    }
+
+    plik.close();
+    remove (pobierzNazwePliku().c_str());
+    plikTymczasowy.close();
+
+    rename((pobierzNazwePliku() + "_tymczasowy.txt").c_str(),pobierzNazwePliku().c_str());
+}
+
+
+int PlikZAdresatami::zwrocNumerLiniiSzukanegoAdresata(int idAdresata)
+{
+    bool czyIstniejeAdresat = false;
+    int numerLiniiWPlikuTekstowym = 1;
+    string daneJednegoAdresataOddzielonePionowymiKreskami = "";
+    fstream plikTekstowy;
+    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
+
+    if (plikTekstowy.good() == true && idAdresata != 0)
+    {
+        while(getline(plikTekstowy, daneJednegoAdresataOddzielonePionowymiKreskami))
+        {
+            if(idAdresata == MetodyPomocnicze::pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneJednegoAdresataOddzielonePionowymiKreskami))
+            {
+                czyIstniejeAdresat = true;
+                plikTekstowy.close();
+                return numerLiniiWPlikuTekstowym;
+            }
+            else
+                numerLiniiWPlikuTekstowym++;
+        }
+        if (czyIstniejeAdresat = false)
+        {
+            plikTekstowy.close();
+            return 0;
+        }
+    }
+    return 0;
+}
+
+
+void PlikZAdresatami::edytujWybranaLinieWPliku(int numerEdytowanejLinii, string liniaZDanymiAdresataOddzielonePionowymiKreskami)
+{
+    fstream plik, plikTymczasowy;
+    string wczytanaLinia = "";
+    int numerWczytanejLinii = 1;
+
+    plik.open(pobierzNazwePliku().c_str(), ios::in);
+    plikTymczasowy.open((pobierzNazwePliku() + "_tymczasowy.txt").c_str(), ios::out | ios::app);
+
+    if (plik.good() == true)
+    {
+        while (getline(plik, wczytanaLinia))
+        {
+            if (numerWczytanejLinii == numerEdytowanejLinii)
+            {
+                if (numerWczytanejLinii == 1)
+                    plikTymczasowy << liniaZDanymiAdresataOddzielonePionowymiKreskami;
+                else if (numerWczytanejLinii > 1)
+                    plikTymczasowy << endl << liniaZDanymiAdresataOddzielonePionowymiKreskami;
+            }
+            else
+            {
+                if (numerWczytanejLinii == 1)
+                    plikTymczasowy << wczytanaLinia;
+                else if (numerWczytanejLinii > 1)
+                    plikTymczasowy << endl << wczytanaLinia;
+            }
+            numerWczytanejLinii++;
+        }
+    plik.close();
+    remove (pobierzNazwePliku().c_str());
+    plikTymczasowy.close();
+
+    rename((pobierzNazwePliku() + "_tymczasowy.txt").c_str(),pobierzNazwePliku().c_str());
+    }
+}
