@@ -1,7 +1,5 @@
 #include "MetodyPomocnicze.h"
-#include <fstream>
-#include <sstream>
-#include <algorithm>
+
 
 string MetodyPomocnicze::konwerjsaIntNaString(int liczba)
 {
@@ -88,7 +86,6 @@ char MetodyPomocnicze::wczytajZnak()
     return znak;
 }
 
-
 int MetodyPomocnicze::pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami)
 {
 
@@ -159,7 +156,6 @@ string MetodyPomocnicze::zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKr
 
     return liniaZDanymiAdresata;
 }
-
 
 void MetodyPomocnicze::wyswietlDaneAdresata(Adresat adresat)
 {

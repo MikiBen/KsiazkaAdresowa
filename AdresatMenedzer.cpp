@@ -1,21 +1,22 @@
 #include "AdresatMenedzer.h"
 
-void AdresatMenedzer::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika)
+void AdresatMenedzer::wczytajAdresatowZalogowanegoUzytkownikaZPliku()
 {
-    adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
+    adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(ID_ZALOGOWANEGO_UZYTKOWNIKA);
 }
 
-void AdresatMenedzer::wczytajAdresatowWszystkichUzytkownikowZPliku()
+int AdresatMenedzer::pobierzIdOstatniegoAdresata()
 {
-    adresaciWszyscy = plikZAdresatami.wczytajAdresatowWszystkichUzytkownikowZPliku();
+    return plikZAdresatami.pobierzIdOstatniegoAdresata();
 }
 
-Adresat AdresatMenedzer::podajDaneNowegoAdresata(int idZalogowanegoUzytkownika)
+Adresat AdresatMenedzer::podajDaneNowegoAdresata()
 {
     Adresat adresat;
+    int id =   plikZAdresatami.pobierzIdOstatniegoAdresata()+1;
 
-    adresat.ustawId( ++idOstatniegoAdresata);
-    adresat.ustawIdUzytkownika(idZalogowanegoUzytkownika);
+    adresat.ustawId(id);
+    adresat.ustawIdUzytkownika(ID_ZALOGOWANEGO_UZYTKOWNIKA);
 
     cout << "Podaj imie: ";
     adresat.ustawImie(MetodyPomocnicze::wczytajLinie());
@@ -38,22 +39,7 @@ Adresat AdresatMenedzer::podajDaneNowegoAdresata(int idZalogowanegoUzytkownika)
 }
 
 
-
-void AdresatMenedzer::pobierzIdOstatniegoAdresat()
-{
-    int liczbaAdresatow;
-    //jeśli chcemy indwidualne naliczanie adresatów to użyjmy vector adresaci
-    wczytajAdresatowWszystkichUzytkownikowZPliku();
-    liczbaAdresatow =   adresaciWszyscy.size()-1;
-
-    if(liczbaAdresatow >0)
-        idOstatniegoAdresata = adresaciWszyscy[liczbaAdresatow].pobierzId();
-    else idOstatniegoAdresata = 0;
-
-
-}
-
-void AdresatMenedzer::wyswietlWszystkichAdresatow(int idZalogowanegoUzytkownika)
+void AdresatMenedzer::wyswietlWszystkichAdresatow()
 {
     system("cls");
     if (!adresaci.empty())
@@ -87,9 +73,6 @@ void AdresatMenedzer::usuniecieAdresata()
     cout<<"Podaj numer id kontaktu do usuniecia: "<<endl;
     cin>>numerDoUsuniecia;
 
-
-    //sprawdzenie czy należy adresat do użytkownika
-
     for(int i=0; i<adresaci.size(); i++)
     {
         if(numerDoUsuniecia==adresaci[i].pobierzId())
@@ -108,7 +91,6 @@ void AdresatMenedzer::usuniecieAdresata()
                 return;
             }
             else return;
-
         }
     }
     cout<<endl<<"Brak adresata o takim ID "<<endl;
@@ -119,7 +101,6 @@ void AdresatMenedzer::usuniecieAdresata()
 void AdresatMenedzer::wypisanieAdresata(int i)
 {
     cout<< adresaci[i].pobierzImie()<<endl;
-
     cout<< adresaci[i].pobierzNazwisko()<<endl;
     cout<< adresaci[i].pobierzNumerTelefonu()<<endl;
     cout<< adresaci[i].pobierzEmail()<<endl;
@@ -127,27 +108,23 @@ void AdresatMenedzer::wypisanieAdresata(int i)
 }
 
 
-
-
-
-void AdresatMenedzer::dodajAdresata(int idZalogowanegoUzytkownika)
+void AdresatMenedzer::dodajAdresata()
 {
     Adresat adresat;
 
     system("cls");
     cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
-    adresat = podajDaneNowegoAdresata(idZalogowanegoUzytkownika);
+    adresat = podajDaneNowegoAdresata();
 
     adresaci.push_back(adresat);
     plikZAdresatami.dopiszAdresataDoPliku(adresat);
 
-    //idOstatniegoAdresata;
 }
 
 
 void AdresatMenedzer::edytujAdresata()
 {
-        system("cls");
+    system("cls");
     Adresat adresat;
     int idEdytowanegoAdresata = 0;
     int numerLiniiEdytowanegoAdresata = 0;
@@ -164,7 +141,7 @@ void AdresatMenedzer::edytujAdresata()
         if (adresaci[i].pobierzId() == idEdytowanegoAdresata)
         {
             czyIstniejeAdresat = true;
-             wybor = MetodyPomocnicze::wybierzOpcjeZMenuEdycja();
+            wybor = MetodyPomocnicze::wybierzOpcjeZMenuEdycja();
 
             switch (wybor)
             {
@@ -172,7 +149,6 @@ void AdresatMenedzer::edytujAdresata()
                 cout << "Podaj nowe imie: ";
                 adresaci[i].ustawImie(MetodyPomocnicze::wczytajLinie());
                 adresaci[i].ustawImie(MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresaci[i].pobierzImie())) ;
-                //dresat.ustawImie(MetodyPomocnicze::wczytajLinie());
                 zaktualizujDaneWybranegoAdresata(adresaci[i], idEdytowanegoAdresata);
                 break;
             case '2':
@@ -209,7 +185,7 @@ void AdresatMenedzer::edytujAdresata()
     {
         cout << endl << "Nie ma takiego adresata." << endl << endl;
     }
-     system("pause");
+    system("pause");
 }
 
 void AdresatMenedzer::zaktualizujDaneWybranegoAdresata(Adresat adresat, int idEdytowanegoAdresata)
@@ -231,7 +207,6 @@ int AdresatMenedzer::podajIdWybranegoAdresata()
     idWybranegoAdresata  = MetodyPomocnicze::wczytajLiczbeCalkowita();
     return idWybranegoAdresata;
 }
-
 
 void AdresatMenedzer::wyszukajAdresatowPoImieniu()
 {
@@ -288,7 +263,7 @@ void AdresatMenedzer::wyszukajAdresatowPoNazwisku()
                 iloscAdresatow++;
             }
         }
-         MetodyPomocnicze::wyswietlIloscWyszukanychAdresatow(iloscAdresatow);
+        MetodyPomocnicze::wyswietlIloscWyszukanychAdresatow(iloscAdresatow);
     }
     else
     {

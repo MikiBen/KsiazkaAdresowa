@@ -3,15 +3,10 @@
 void UzytkownikMenedzer::wylogowanieSieUzytkownika()
 {
     idZalogowanegoUzytkownika=0;
-    //adresaci.clear();
 }
-
-
 
 void UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika()
 {
-    //Uzytkownik uzytkownik;
-    //uzytkownik = uzytkownicy;
     string noweHaslo = "";
     cout << "Podaj nowe haslo: ";
     noweHaslo = MetodyPomocnicze::wczytajLinie();
@@ -21,28 +16,22 @@ void UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika()
         if (uzytkownicy[i].pobierzId() == idZalogowanegoUzytkownika)
         {
             uzytkownicy[i].ustawHaslo(noweHaslo);
-            //uzytkownicy[i].pobierzId() noweHaslo;
             cout << "Haslo zostalo zmienione." << endl << endl;
             system("pause");
         }
     }
 
     plikZUzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
-    //plikZUzytkownikami.dopiszUzytkownikaDoPliku(uzytkownik);
-
-    // stworzyc ta funkcje w uzytkoniwk menedzer
 }
 
 
 void UzytkownikMenedzer::logowanieUzytkownika()
 {
-    //Uzytkownik uzytkownik;
     string login = "", haslo = "";
 
     cout << endl << "Podaj login: ";
     login = MetodyPomocnicze::wczytajLinie();
 
-    // vector <Uzytkownik>::iterator itr = uzytkownicy.begin();
     for (int i=0; i<uzytkownicy.size(); i++)
     {
         if (uzytkownicy[i].pobierzLogin() == login)
@@ -57,10 +46,7 @@ void UzytkownikMenedzer::logowanieUzytkownika()
                     cout << endl << "Zalogowales sie." << endl << endl;
                     idZalogowanegoUzytkownika = uzytkownicy[i].pobierzId();
                     system("pause");
-                    panelZAdresatami();
-                    //adresaci.panelZAdresatami();
                     return;
-
                 }
             }
             cout << "Wprowadzono 3 razy bledne haslo." << endl;
@@ -92,20 +78,17 @@ Uzytkownik UzytkownikMenedzer::podajDaneNowegoUzytkownika()
 {
     Uzytkownik uzytkownik;
 
-    //uzytkownik.id = pobierzIdNowegoUzytkownika();
     uzytkownik.ustawId(pobierzIdNowegoUzytkownika());
     string login,haslo;
     do
     {
         cout << "Podaj login: ";
-        //uzytkownik.login = wczytajLinie();
         cin>>login;
         uzytkownik.ustawLogin(login);
     }
     while (czyIstniejeLogin(uzytkownik.pobierzLogin()) == true);
 
     cout << "Podaj haslo: ";
-    //uzytkownik.haslo = wczytajLinie();
     cin>>haslo;
     uzytkownik.ustawHaslo(haslo);
     return uzytkownik;
@@ -143,56 +126,16 @@ void UzytkownikMenedzer::wypiszWszystkichUzytkonikow()
     }
 }
 
-void UzytkownikMenedzer::panelZAdresatami()
+int UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika()
 {
-    char wybor;
-    //int idZalogowanegoUzytkownika = id;
-    adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
-    adresatMenedzer.pobierzIdOstatniegoAdresat();
-
-
-    while(true)
-    {
-
-        wybor = MetodyPomocnicze::wybierzOpcjeZMenuUzytkownika();
-        switch (wybor)
-        {
-        case '1':
-            adresatMenedzer.dodajAdresata(idZalogowanegoUzytkownika);
-            break;
-        case '2':
-            adresatMenedzer.wyszukajAdresatowPoImieniu();
-            break;
-        case '3':
-            adresatMenedzer.wyszukajAdresatowPoNazwisku();
-            break;
-        case '4':
-            adresatMenedzer.wyswietlWszystkichAdresatow(idZalogowanegoUzytkownika);
-            break;
-        case '5':
-            adresatMenedzer.usuniecieAdresata();
-            // idOstatniegoAdresata = podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(idUsunietegoAdresata, idOstatniegoAdresata);
-            break;
-        case '6':
-            adresatMenedzer.edytujAdresata();
-            break;
-        case '7':
-            zmianaHaslaZalogowanegoUzytkownika();
-            break;
-        case '8':
-
-           wylogowanieSieUzytkownika();
-             //adresaci.clear();
-            return;
-        }
-    }
-
+    return idZalogowanegoUzytkownika;
 }
 
-
-
-
-
-
-
+bool UzytkownikMenedzer::czyUzytkownikJestZalogowany()
+{
+    if (idZalogowanegoUzytkownika>0)
+        return true;
+    else
+        return false;
+}
 

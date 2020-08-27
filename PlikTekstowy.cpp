@@ -1,4 +1,3 @@
-/*
 #include "PlikTekstowy.h"
 
 string PlikTekstowy::pobierzNazwePliku()
@@ -22,5 +21,3 @@ bool PlikTekstowy::czyPlikJestPusty()
     plikTekstowy.close();
     return pusty;
 }
-
-*/

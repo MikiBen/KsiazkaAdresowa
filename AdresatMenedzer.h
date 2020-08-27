@@ -1,7 +1,6 @@
 #ifndef ADRESATMENEDZER_H
 #define ADRESATMENEDZER_H
 
-
 #include <iostream>
 #include <vector>
 #include <windows.h>
@@ -9,46 +8,37 @@
 #include <sstream>
 
 #include "Adresat.h"
-#include "Uzytkownik.h"
-#include "PlikZUzytkownikami.h"
 #include "PlikZAdresatami.h"
 #include "MetodyPomocnicze.h"
-//#include "UzytkownicyMenedzer.h"
 
 using namespace std;
 class AdresatMenedzer
 {
-    int idOstatniegoAdresata;
-    //int idZalogowanegoUzytkownika;
-    //UzytkownikMenedzer uzytkownikMenedzer;
+    const int ID_ZALOGOWANEGO_UZYTKOWNIKA;
     vector <Adresat> adresaci;
-    vector <Adresat> adresaciWszyscy;
-
-    Adresat podajDaneNowegoAdresata(int idZalogowanegoUzytkownika);
-
-    void wypisanieAdresata(int i);
-    //void nadpisywaniePlikuPoUsunieciu(int idAdresataDoZmiany);
 
     PlikZAdresatami plikZAdresatami;
-    int podajIdWybranegoAdresata();
 
+    Adresat podajDaneNowegoAdresata();
+    void wypisanieAdresata(int i);
+    int podajIdWybranegoAdresata();
     void zaktualizujDaneWybranegoAdresata(Adresat adresat, int idEdytowanegoAdresata);
 
 public:
-    AdresatMenedzer(string nazwaPlikuZ): plikZAdresatami(nazwaPlikuZ)
+    AdresatMenedzer(string nazwaPlikuZAdresatami, int idZalogowanegoUzytkownika): plikZAdresatami(nazwaPlikuZAdresatami), ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika)
     {
-
+        adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
     };
     void usuniecieAdresata();
-    void pobierzIdOstatniegoAdresat();
-    void wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
+
+    void wczytajAdresatowZalogowanegoUzytkownikaZPliku();
     void wczytajAdresatowWszystkichUzytkownikowZPliku();
-    void wyswietlWszystkichAdresatow(int idZalogowanegoUzytkownika);
-    void dodajAdresata(int idZalogowanegoUzytkownika);
+    void wyswietlWszystkichAdresatow();
+    void dodajAdresata();
     void edytujAdresata();
     void wyszukajAdresatowPoImieniu();
     void wyszukajAdresatowPoNazwisku();
-
+    int pobierzIdOstatniegoAdresata();
 };
 
 #endif

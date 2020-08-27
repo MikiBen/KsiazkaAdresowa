@@ -11,21 +11,34 @@ using namespace std;
 class KsiazkaAdresowa
 {
     UzytkownikMenedzer uzytkownikMenedzer;
+    AdresatMenedzer *adresatMenedzer;
+    const string NAZWA_PLIKU_Z_ADRESATAMI;
 
-   // int idZalogowanegoUzytkownika;
-public:
-    //KsiazkaAdresowa(string nazwaPlikuZUzytkownikami,string nazwaPlikuZAdresatami): uzytkownikMenedzer(nazwaPlikuZUzytkownikami),adresatMenedzer(nazwaPlikuZAdresatami)
-    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami,string nazwaPlikuZAdresatami): uzytkownikMenedzer(nazwaPlikuZUzytkownikami,nazwaPlikuZAdresatami)
-    //KsiazkaAdresowa(string nazwaPlikuZAdresatami): adresatMenedzer(nazwaPlikuZAdresatami)
-    {
-
-    };
-    void rejestracjaUzytkownika();
+    void dodajAdresata();
+    void wyswietlWszystkichAdresatow();
+    void wyszukajAdresatowPoImieniu();
+    void wyszukajAdresatowPoNazwisku();
+    void usuniecieAdresata();
+    void edytujAdresata();
+    void zmianaHaslaZalogowanegoUzytkownika();
+    void wylogowanieSieUzytkownika();
     void wypiszWszystkichUzytkonikow();
+    void panelZAdresatami();
+
+public:
+
+    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami,string nazwaPlikuZAdresatami): uzytkownikMenedzer(nazwaPlikuZUzytkownikami),NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami)
+    {
+        adresatMenedzer = NULL;
+    };
+    ~KsiazkaAdresowa()
+    {
+        delete adresatMenedzer;
+        adresatMenedzer = NULL;
+    }
+    void rejestracjaUzytkownika();
     void logowanieUzytkownika();
 
-    /*void zmianaHaslaZalogowanegoUzytkownika();
-    void wylogowanieSieUzytkownika();
-*/
+
 };
 #endif

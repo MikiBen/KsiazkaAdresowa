@@ -66,30 +66,6 @@ int main()
             }
     }
 
-
-
-
-
-
-   // KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt");
-    //ksiazkaAdresowa.wypiszWszystkichUzytkonikow();
-   //ksiazkaAdresowa.rejestracjaUzytkownika();
- // ksiazkaAdresowa.rejestracjaUzytkownika();
-//ksiazkaAdresowa.wypiszWszystkichUzytkonikow();
-
-   //ksiazkaAdresowa.logowanieUzytkownika();
-   //ksiazkaAdresowa.wypiszWszystkichUzytkonikow();
-
-   // ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika();
-
-//ksiazkaAdresowa.wypiszWszystkichUzytkonikow();
-
-
-
-
-
-
-
     return 0;
 }
 

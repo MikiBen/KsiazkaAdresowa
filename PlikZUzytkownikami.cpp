@@ -5,7 +5,6 @@ void PlikZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik>
 {
     fstream plikTekstowy;
     string liniaZDanymiUzytkownika = "";
-    //vector <Uzytkownik>::iterator itrKoniec = --uzytkownicy.end();
 
     plikTekstowy.open(pobierzNazwePliku().c_str(), ios::out);
 
@@ -14,13 +13,7 @@ void PlikZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik>
         for (int i=0; i<uzytkownicy.size(); i++)
 
         {
-
-            //cout<<uzytkownicy[i].pobierzId()<<endl;
-            //cout<<uzytkownicy[i].pobierzLogin()<<endl;
-            //cout<<uzytkownicy[i].pobierzHaslo()<<endl<<endl;
-            //cout<<uzytkownicy[i]<<" uzytkownicy"<<endl;
             liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownicy[i]);
-            //cout<<liniaZDanymiUzytkownika<<" liniaZDanymiUzytkownikay"<<endl;
             if (i<uzytkownicy.size()-1)
             {
                 plikTekstowy << liniaZDanymiUzytkownika<< endl;
@@ -38,9 +31,6 @@ void PlikZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik>
     }
     plikTekstowy.close();
 }
-
-
-
 
 
 Uzytkownik PlikZUzytkownikami::pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami)
@@ -123,17 +113,6 @@ void PlikZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik)
     plikTekstowy.close();
 }
 
-
-/*bool PlikZUzytkownikami::czyPlikJestPusty(fstream &plikTekstowy)
-{
-    //fstream plikTekstowy;
-    plikTekstowy.seekg(0, ios::end);
-    if (plikTekstowy.tellg() == 0)
-        return true;
-    else
-        return false;
-}
-*/
 string PlikZUzytkownikami::zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik)
 {
     string liniaZDanymiUzytkownika = "";
