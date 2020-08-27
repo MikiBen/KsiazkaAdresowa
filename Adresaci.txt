@@ -1,9 +1,0 @@
-1|1|Dd|Dd|dd|d|d|
-2|1|Dd|Dd|d|d|dd|
-1|2|Rr|R|r|r|r|
-2|2|Rr|Rr|rrr|r|r|
-3|1|Oo|O|o|o|o|
-4|1|Rt||t|t|t|
-5|1|Vv|V|vv|v|v|
-3|2|Eeee|E|e|e|ee|
-4|2|Eee|Ee|q|qqq|q|
